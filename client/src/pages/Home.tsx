@@ -59,7 +59,7 @@ export default function Home() {
         className={`w-full h-full border-0 transition-opacity duration-700 ${
           !showSplash ? "opacity-100" : "opacity-0"
         }`}
-        title="Aira AI"
+        title="سامانه سپاس"
         onLoad={handleLoad}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
