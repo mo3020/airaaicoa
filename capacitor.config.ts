@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.airaai.app',
-  appName: 'Aira AI',
+  appName: 'سامانه سپاس',
   webDir: 'dist/public',
   server: {
     androidScheme: 'https'
