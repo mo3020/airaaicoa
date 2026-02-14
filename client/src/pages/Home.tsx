@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoUrl from "@assets/sepas.png";
+import logoUrl from "@assets/logosepas.png";
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
