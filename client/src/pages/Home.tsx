@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoUrl from "@assets/airalogo_1764461638117.png";
+import logoUrl from "@assets/sepas.png";
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
@@ -36,7 +36,7 @@ export default function Home() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               src={logoUrl} 
-              alt="Aira AI Logo" 
+              alt="سپاس" 
               className="w-64 h-64 object-contain drop-shadow-2xl" 
             />
           </motion.div>
@@ -55,7 +55,7 @@ export default function Home() {
 
       {/* Full Screen Iframe */}
       <iframe
-        src="https://airaai.co"
+        src="https://eshop.kiosk-online.ir/"
         className={`w-full h-full border-0 transition-opacity duration-700 ${
           !showSplash ? "opacity-100" : "opacity-0"
         }`}
