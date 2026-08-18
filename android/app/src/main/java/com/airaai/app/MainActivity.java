@@ -1,4 +1,4 @@
-package com.airaai.app;
+package com.realora.app;
 
 import com.getcapacitor.BridgeActivity;
 
