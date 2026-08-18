@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.airaai.app',
-  appName: 'سامانه سپاس',
+  appId: 'com.realaro.app',
+  appName: 'realaro',
   webDir: 'dist/public',
   server: {
     androidScheme: 'https'
