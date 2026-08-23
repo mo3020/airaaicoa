@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoUrl from "@assets/airalogo.png";
+import logoUrl from "@assets/areallogo.png";
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
@@ -36,7 +36,7 @@ export default function Home() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               src={logoUrl} 
-              alt="Aira Ai" 
+              alt=" realora online" 
               className="w-64 h-64 object-contain drop-shadow-2xl" 
             />
           </motion.div>
@@ -48,18 +48,18 @@ export default function Home() {
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-background z-10">
           <Loader2 className="w-10 h-10 text-primary animate-spin" />
           <p className="mt-4 text-muted-foreground text-sm font-medium animate-pulse">
-            در حال بارگذاری...
+          Loading ...
           </p>
         </div>
       )}
 
       {/* Full Screen Iframe */}
       <iframe
-        src="https://ai.airaai.co/"
+        src="https://realora.online/"
         className={`w-full h-full border-0 transition-opacity duration-700 ${
           !showSplash ? "opacity-100" : "opacity-0"
         }`}
-        title="Aira Ai"
+        title="realora online"
         onLoad={handleLoad}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
