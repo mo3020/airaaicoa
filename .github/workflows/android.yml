@@ -47,18 +47,38 @@ jobs:
           cd android
           ./gradlew assembleRelease
 
-      - name: Find and prepare APK
+      - name: Find Release APK
         run: |
-          APK=$(find android/app/build/outputs/apk -type f -name "*.apk" | head -n 1)
+          echo "🔎 Searching for Release APK..."
+
+          find android/app/build/outputs/apk -type f -name "*.apk" -print
+
+          APK=$(find android/app/build/outputs/apk/release -type f -name "*.apk" | head -n 1)
 
           if [ -z "$APK" ]; then
-            echo "❌ APK پیدا نشد"
+            echo "❌ Release APK پیدا نشد"
             exit 1
           fi
 
-          echo "✅ APK found: $APK"
+          echo "✅ Release APK found:"
+          echo "$APK"
 
           cp "$APK" app-release.apk
+
+      - name: Verify APK
+        run: |
+          echo "🔐 Verifying APK..."
+
+          APKSIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner | sort -V | tail -n 1)
+
+          if [ -z "$APKSIGNER" ]; then
+            echo "❌ apksigner پیدا نشد"
+            exit 1
+          fi
+
+          "$APKSIGNER" verify --verbose app-release.apk
+
+          echo "✅ APK signature verified successfully"
 
       - name: Upload Release APK
         uses: actions/upload-artifact@v4
