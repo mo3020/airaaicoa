@@ -39,21 +39,42 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Check Release Keystore
+        run: |
+          if [ ! -f "android/aira-release.keystore" ]; then
+            echo "❌ aira-release.keystore پیدا نشد"
+            echo "📁 باید فایل در مسیر android/aira-release.keystore قرار داشته باشد"
+            exit 1
+          fi
+
+          echo "✅ Release keystore found"
+
       - name: Sync Capacitor
         run: npx cap sync android
 
-      - name: Build APK with Gradle
+      - name: Build Release APK
         run: |
           cd android
-          ./gradlew assembleRelease
+
+          ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file="$GITHUB_WORKSPACE/android/aira-release.keystore" \
+            -Pandroid.injected.signing.store.password="AiraRelease2026!" \
+            -Pandroid.injected.signing.key.alias="aira" \
+            -Pandroid.injected.signing.key.password="AiraRelease2026!"
 
       - name: Find Release APK
         run: |
           echo "🔎 Searching for Release APK..."
 
-          find android/app/build/outputs/apk -type f -name "*.apk" -print
+          find android/app/build/outputs/apk/release \
+            -type f \
+            -name "*.apk" \
+            -print
 
-          APK=$(find android/app/build/outputs/apk/release -type f -name "*.apk" | head -n 1)
+          APK=$(find android/app/build/outputs/apk/release \
+            -type f \
+            -name "*.apk" \
+            | head -n 1)
 
           if [ -z "$APK" ]; then
             echo "❌ Release APK پیدا نشد"
@@ -65,11 +86,14 @@ jobs:
 
           cp "$APK" app-release.apk
 
-      - name: Verify APK
+      - name: Verify APK Signature
         run: |
           echo "🔐 Verifying APK..."
 
-          APKSIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner | sort -V | tail -n 1)
+          APKSIGNER=$(find "$ANDROID_HOME/build-tools" \
+            -name "apksigner" \
+            | sort -V \
+            | tail -n 1)
 
           if [ -z "$APKSIGNER" ]; then
             echo "❌ apksigner پیدا نشد"
@@ -78,7 +102,9 @@ jobs:
 
           "$APKSIGNER" verify --verbose app-release.apk
 
-          echo "✅ APK signature verified successfully"
+          echo "======================================"
+          echo "✅ APK SIGNATURE VERIFIED"
+          echo "======================================"
 
       - name: Upload Release APK
         uses: actions/upload-artifact@v4
