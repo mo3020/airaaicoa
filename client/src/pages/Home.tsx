@@ -31,13 +31,13 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="absolute inset-0 z-50 flex items-center justify-center bg-black"
           >
-            <motion.img 
+            <motion.img
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              src={logoUrl} 
-              alt=" realora online" 
-              className="w-64 h-64 object-contain drop-shadow-2xl" 
+              src={logoUrl}
+              alt=" realora online"
+              className="w-64 h-64 object-contain drop-shadow-2xl"
             />
           </motion.div>
         )}
@@ -48,14 +48,14 @@ export default function Home() {
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-background z-10">
           <Loader2 className="w-10 h-10 text-primary animate-spin" />
           <p className="mt-4 text-muted-foreground text-sm font-medium animate-pulse">
-          Loading ...
+            Loading ...
           </p>
         </div>
       )}
 
       {/* Full Screen Iframe */}
       <iframe
-        src="https://realora.online/"
+        src="https://airayar.ir/"
         className={`w-full h-full border-0 transition-opacity duration-700 ${
           !showSplash ? "opacity-100" : "opacity-0"
         }`}
